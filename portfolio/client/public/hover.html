@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Dot Canvas</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #0f172a; /* Dark background */
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="dotCanvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('dotCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Canvas Sizing
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      initDots();
+    });
+
+    // Mouse Tracking
+    const mouse = {
+      x: null,
+      y: null,
+      radius: 120 // The radius/distance around the cursor where dots start repelling
+    };
+
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
+    // Dot Object Structure
+    class Dot {
+      constructor(x, y) {
+        this.baseX = x; // Anchor position
+        this.baseY = y;
+        this.x = x;     // Current position
+        this.y = y;
+        this.size = 2;  // Dot radius
+        this.density = (Math.random() * 20) + 1; // Controls repulsion speed/weight
+      }
+
+      draw() {
+        ctx.fillStyle = 'rgba(148, 163, 184, 0.7)'; // Dot color
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      update() {
+        // Calculate distance between mouse cursor and dot
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+
+        // Repulsion Logic (Mouse Interaction)
+        if (mouse.x !== null && distance < mouse.radius) {
+          const forceDirectionX = dx / distance;
+          const forceDirectionY = dy / distance;
+          const maxDistance = mouse.radius;
+          const force = (maxDistance - distance) / maxDistance;
+          
+          // Move the dot away from mouse cursor
+          const directionX = forceDirectionX * force * this.density;
+          const directionY = forceDirectionY * force * this.density;
+
+          this.x -= directionX;
+          this.y -= directionY;
+        } else {
+          // Spring/Return Logic (Return dot to its base position when cursor moves away)
+          if (this.x !== this.baseX) {
+            let dxReturn = this.x - this.baseX;
+            this.x -= dxReturn / 10; // 10 controls return easing speed
+          }
+          if (this.y !== this.baseY) {
+            let dyReturn = this.y - this.baseY;
+            this.y -= dyReturn / 10;
+          }
+        }
+      }
+    }
+
+    // Grid Initialization
+    let dotsArray = [];
+    const gap = 30; // Grid spacing between dots
+
+    function initDots() {
+      dotsArray = [];
+      for (let y = 0; y < height; y += gap) {
+        for (let x = 0; x < width; x += gap) {
+          dotsArray.push(new Dot(x, y));
+        }
+      }
+    }
+
+    // Animation Loop
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < dotsArray.length; i++) {
+        dotsArray[i].draw();
+        dotsArray[i].update();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    initDots();
+    animate();
+  </script>
+</body>
+</html>

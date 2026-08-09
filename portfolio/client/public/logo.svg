@@ -1,0 +1,15 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E52323" />
+      <stop offset="100%" stop-color="#8C1111" />
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="28" fill="#151212" stroke="rgba(217, 217, 217, 0.15)" stroke-width="2"/>
+  <!-- Stylized "B" monogram with video editor play blade cutouts -->
+  <path d="M38 32H66C76 32 83 38 83 47C83 53.5 78.5 58 72 60C79.5 62 85 67 85 75C85 85 77 90 66 90H38V32Z" fill="url(#logo-grad)"/>
+  <path d="M52 42H64C68.5 42 71.5 44.5 71.5 48C71.5 51.5 68.5 54 64 54H52V42Z" fill="#151212"/>
+  <path d="M52 64H65C70 64 73 66.5 73 70.5C73 74.5 70 77 65 77H52V64Z" fill="#151212"/>
+  <!-- Accent cutter slice -->
+  <polygon points="26,60 38,52 38,68" fill="#FFFFFF" opacity="0.9"/>
+</svg>

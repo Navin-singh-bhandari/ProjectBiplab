@@ -1,0 +1,137 @@
+.navbar{
+  position: sticky;
+  top: 0;
+  margin-top: 16px; 
+  z-index: 100;
+  background: transparent;
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s ease, background .3s ease;
+  
+}
+
+.navbar.scrolled{
+  background: rgba(13, 13, 13, 0.88);
+  border-bottom-color: var(--border);
+}
+
+.navbar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 20px 0;
+}
+
+.nav-group{
+  display:flex;
+  gap: 38px;
+  flex: 1;
+}
+
+.nav-group.right{
+  justify-content:flex-end;
+}
+
+.nav-link{
+  font-family: Bebas Neue;
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  color: var(--text);
+  opacity: 0.78;
+  position: relative;
+  padding-bottom: 4px;
+  transition: opacity .25s ease, color .25s ease;
+}
+
+.nav-link::after{
+  content:'';
+  position:absolute;
+  left:0; bottom:0;
+  width:0%;
+  height:1px;
+  background: var(--accent-bright);
+  transition: width .3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active{
+  opacity:1;
+  color:#fff;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after{
+  width:100%;
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  letter-spacing: 3px;
+  font-size: 19px;
+  color: var(--text);
+  white-space: nowrap;
+  padding: 0 24px;
+  transition: opacity .25s ease;
+}
+
+.brand:hover{
+  opacity: 0.85;
+}
+
+.brand-logo{
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+.brand-name{
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+
+.burger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  background:none;
+  border:none;
+  padding: 6px;
+}
+
+.burger span{
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  transition: transform .25s ease, opacity .25s ease;
+}
+
+.burger.open span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2){ opacity:0; }
+.burger.open span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu{
+  display:flex;
+  flex-direction:column;
+  gap: 4px;
+  padding: 8px 22px 26px;
+  border-bottom: 1px solid var(--border);
+}
+
+.mobile-menu a{
+  font-family: var(--font-heading);
+  letter-spacing: 1.5px;
+  font-size: 17px;
+  padding: 12px 4px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 860px){
+  .nav-group{ display:none; }
+  .burger{ display:flex; }
+  .navbar-inner{ padding: 20px 22px; }
+  .brand{ padding: 0; font-size: 17px; }
+}

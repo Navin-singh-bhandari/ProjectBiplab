@@ -1,0 +1,222 @@
+/* ---------------- HERO ---------------- */
+.hero {
+  padding: 12px 0 90px;
+  text-align: center;
+  background: linear-gradient(180deg, #0D0D0D 0%, #170707 35%, #420A0A 100%);
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-name {
+  font-family: Neue Montreal;
+  font-size: clamp(40px, 6vw, 80px);
+  letter-spacing: 3px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: #E2E2E2;
+}
+
+.hero-role {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: clamp(14px, 1.5vw, 17px);
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+  margin-top: 10px;
+}
+
+.hero-video-wrap {
+  width: 100%;
+  max-width: 860px;
+  margin-top: 28px;
+}
+
+.hero-description {
+  font-family: Neue Montreal;
+  font-weight: 600;
+  font-size: clamp(14px, 1.5vw, 17px);
+  line-height: 1.55;
+  color: #E2E2E2;
+  max-width: 720px;
+  margin: 32px auto 0;
+}
+
+.hero-description::first-letter {
+  font-size: 1.5rem;
+  /* Adjust size as needed */
+  font-weight: bold;
+  line-height: 1;
+
+}
+
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ---------------- LOGOS ---------------- */
+.logos {
+  padding: 56px 0;
+}
+
+.logos-label {
+  font-family: var(--font-sub);
+  font-size: 13px;
+  letter-spacing: 1px;
+  color: var(--text-faint);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logos-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px 56px;
+}
+
+.logo-item {
+  font-family: var(--font-heading);
+  letter-spacing: 2px;
+  font-size: 16px;
+  color: var(--text-faint);
+  transition: color .25s ease;
+}
+
+.logo-item:hover {
+  color: var(--text);
+}
+
+/* ---------------- CAPABILITIES ---------------- */
+.capabilities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  margin-top: 52px;
+  border: 1px solid var(--border);
+}
+
+.capability-card {
+  background: var(--bg);
+  padding: 40px;
+}
+
+.capability-card h3 {
+  font-family: var(--font-headline);
+  font-weight: 500;
+  font-size: 21px;
+  margin: 16px 0 12px;
+  color: var(--text);
+}
+
+.capability-card p {
+  font-family: var(--font-desc);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-dim);
+}
+
+@media (max-width: 720px) {
+  .capabilities-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------- FEATURED WORKS ---------------- */
+.featured-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.works-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.work-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color .25s ease, transform .25s ease;
+}
+
+.work-card:hover {
+  border-color: var(--accent-bright);
+  transform: translateY(-4px);
+}
+
+.work-thumb {
+  aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #1a1414, #241010);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.work-thumb span {
+  font-family: var(--font-heading);
+  letter-spacing: 1.5px;
+  font-size: 14px;
+  color: var(--text-faint);
+}
+
+.work-meta {
+  padding: 20px;
+}
+
+.work-meta h3 {
+  font-family: var(--font-headline);
+  font-weight: 500;
+  font-size: 19px;
+  color: var(--text);
+}
+
+.work-meta .timecode {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+@media (max-width: 860px) {
+  .works-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .works-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------- CTA BAND ---------------- */
+.cta-band {
+  background: radial-gradient(circle at 50% 0%, rgba(140, 17, 17, 0.25), transparent 60%), var(--bg);
+}
+
+.cta-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.cta-inner .btn {
+  margin-top: 24px;
+}

@@ -1,0 +1,341 @@
+/* ============================================================
+   CONTACT PAGE — matches reference: dark black -> deep red
+   gradient background, centered info column on the left,
+   warm dark-red glass card with the form on the right.
+   ============================================================ */
+
+.contact-section{
+  border-top: none;
+  min-height: calc(100vh - 90px);
+  padding: 90px 0 120px;
+  background: linear-gradient(180deg, #0D0D0D 0%, #0D0D0D 30%, #3a0d0d 75%, #5c1010 100%);
+}
+
+.contact-grid{
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 72px;
+  align-items: start;
+}
+
+/* ---------------- LEFT COLUMN ---------------- */
+.contact-left{
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-title{
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: clamp(38px, 4.6vw, 58px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 56px;
+}
+
+.contact-info-block{
+  text-align: center;
+  margin-bottom: 46px;
+}
+
+.contact-label{
+  font-family: var(--font-sub);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.contact-value{
+  font-family: var(--font-desc);
+  font-weight: 300;
+  font-size: 24px;
+  color: var(--text-dim);
+}
+
+/* ---------------- FORM CARD (LIQUID BUBBLES GLASS DESIGN) ---------------- */
+.contact-form-wrap{ 
+  width: 100%; 
+  margin-top: 80px; 
+}
+
+.contact-form{
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-top: 1px solid rgba(255, 255, 255, 0.55);
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 28px;
+  padding: 46px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  box-shadow: 
+    0 35px 80px rgba(0, 0, 0, 0.65), 
+    inset 0 2px 2px rgba(255, 255, 255, 0.4),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.contact-form:hover{
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.4);
+  border-top-color: rgba(255, 255, 255, 0.75);
+  box-shadow: 
+    0 45px 95px rgba(0, 0, 0, 0.75), 
+    0 0 40px rgba(255, 255, 255, 0.12),
+    inset 0 3px 3px rgba(255, 255, 255, 0.6);
+}
+
+/* Ensure form controls sit above liquid bubbles */
+.contact-form-heading,
+.contact-form-row,
+.contact-form label,
+.contact-form button,
+.contact-error{
+  position: relative;
+  z-index: 2;
+}
+
+.contact-form-heading{
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 30px;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------------- MOUSE CURSOR LIQUID BUBBLES ---------------- */
+.mouse-liquid-bubble{
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(
+    circle at 35% 35%,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.2) 40%,
+    rgba(184, 22, 22, 0.35) 80%,
+    rgba(255, 255, 255, 0.6) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    inset -1px -1px 4px rgba(0, 0, 0, 0.4),
+    inset 1px 1px 3px rgba(255, 255, 255, 0.85),
+    0 0 12px rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  animation: mouseBubbleFloat 0.9s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes mouseBubbleFloat {
+  0% {
+    transform: translate(0, 0) scale(0.3) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.95;
+    transform: translate(calc(var(--float-x) * 0.25), calc(var(--float-y) * 0.25)) scale(1.2) rotate(45deg);
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(var(--float-x), var(--float-y)) scale(0.4) rotate(90deg);
+    opacity: 0;
+  }
+}
+
+.contact-form-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.contact-form label{
+  display: flex;
+  flex-direction: column;
+}
+
+/* Translucent Glass Input Capsules */
+.contact-form input,
+.contact-form textarea{
+  font-family: var(--font-desc);
+  font-weight: 400;
+  font-size: 15px;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  padding: 18px 22px;
+  resize: vertical;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 
+    inset 0 2px 5px rgba(0, 0, 0, 0.35), 
+    inset 0 -1px 2px rgba(255, 255, 255, 0.15),
+    0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.contact-form textarea{ min-height: 140px; }
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 400;
+}
+
+/* Liquid Bubble Hover Motion on Inputs */
+.contact-form input:hover,
+.contact-form textarea:hover{
+  transform: translateY(-2px) scale(1.008);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-color: rgba(255, 255, 255, 0.55);
+  border-top-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 
+    0 10px 25px rgba(0, 0, 0, 0.25),
+    0 0 20px rgba(255, 255, 255, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+/* Liquid Bubble Focus State */
+.contact-form input:focus,
+.contact-form textarea:focus{
+  transform: translateY(-2px) scale(1.01);
+  border-color: rgba(255, 255, 255, 0.85);
+  border-top-color: #FFFFFF;
+  outline: none;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.06) 100%);
+  box-shadow: 
+    0 0 30px rgba(255, 255, 255, 0.3), 
+    0 0 20px rgba(217, 29, 29, 0.5),
+    0 0 0 3px rgba(255, 255, 255, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+/* Ultra-Liquid Glass Red Button */
+.contact-form button{
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-heading);
+  letter-spacing: 2px;
+  margin-top: 10px;
+  align-self: flex-start;
+  padding: 18px 42px;
+  background: linear-gradient(135deg, rgba(217, 29, 29, 0.88) 0%, rgba(140, 17, 17, 0.88) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-top: 1px solid rgba(255, 255, 255, 0.65);
+  border-radius: 12px;
+  color: #FFFFFF;
+  box-shadow: 
+    0 12px 30px rgba(184, 22, 22, 0.45), 
+    inset 0 2px 2px rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.contact-form button::before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.contact-form button:hover::before{
+  left: 100%;
+}
+
+.contact-form button:hover:not(:disabled){
+  background: linear-gradient(135deg, rgba(235, 35, 35, 0.95) 0%, rgba(175, 20, 20, 0.95) 100%);
+  border-color: rgba(255, 255, 255, 0.7);
+  border-top-color: #FFFFFF;
+  box-shadow: 
+    0 18px 40px rgba(217, 29, 29, 0.65), 
+    0 0 30px rgba(255, 255, 255, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.6);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.contact-form button:disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ---------------- STATES ---------------- */
+.contact-error{
+  font-family: var(--font-desc);
+  font-size: 14px;
+  color: #ff9b9b;
+  background: rgba(140, 17, 17, 0.25);
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(140, 17, 17, 0.5);
+}
+
+.contact-success{
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 24px;
+  padding: 48px 40px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(24px) saturate(190%);
+  -webkit-backdrop-filter: blur(24px) saturate(190%);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  text-align: left;
+}
+
+.contact-success .timecode{
+  color: var(--accent-bright);
+}
+
+.contact-success h3{
+  font-family: var(--font-headline);
+  font-weight: 500;
+  font-size: 26px;
+  margin-top: 12px;
+  color: var(--text);
+}
+
+.contact-success p:last-of-type{
+  font-family: var(--font-desc);
+  color: var(--text-dim);
+  margin-top: 10px;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 900px){
+  .contact-grid{
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .contact-title{
+    text-align: center;
+  }
+}
+
+@media (max-width: 560px){
+  .contact-form-row{
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form{
+    padding: 26px;
+  }
+}
