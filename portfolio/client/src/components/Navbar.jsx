@@ -18,13 +18,13 @@ export default function Navbar() {
     <header className={'navbar' + (scrolled ? ' scrolled' : '')}>
       <div className="navbar-inner container">
         <nav className="nav-group left">
-          <NavLink to="/tools" className={linkClass}>Tools</NavLink>
+          <NavLink to="/why-me" className={linkClass}>Why Me</NavLink>
           <NavLink to="/about" className={linkClass}>About</NavLink>
         </nav>
 
         <Link to="/" className="brand">
-          <img src="/logo.svg" alt="Biplab Logo" className="brand-logo" />
-          <span className="brand-name">BIPLAB</span>
+          <img src="/logo.png" alt="Biplab Logo" className="brand-logo" />
+  
         </Link>
 
         <nav className="nav-group right">
@@ -44,7 +44,7 @@ export default function Navbar() {
 
       {open && (
         <div className="mobile-menu">
-          <NavLink to="/tools" onClick={() => setOpen(false)}>Tools</NavLink>
+          <NavLink to="/why-me" onClick={() => setOpen(false)}>Why Me</NavLink>
           <NavLink to="/about" onClick={() => setOpen(false)}>About</NavLink>
           <NavLink to="/works" onClick={() => setOpen(false)}>Works</NavLink>
           <NavLink to="/contact" onClick={() => setOpen(false)}>Contact</NavLink>

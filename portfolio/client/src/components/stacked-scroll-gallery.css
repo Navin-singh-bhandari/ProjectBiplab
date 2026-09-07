@@ -1,0 +1,286 @@
+/* ---------------- FONTS ----------------
+   Bebas Neue and Inter are free — loaded from Google Fonts below.
+   "Neue Montreal" (used for the card title) is a paid font from
+   Pangram Pangram (pangrampangram.com). If you own a license, drop
+   the woff2 files in ./fonts/ and uncomment the @font-face block.
+   Until then, the title falls back to Inter at a heavy weight,
+   which is visually close (both are geometric grotesques).
+------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+
+/*
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('./fonts/NeueMontreal-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
+/* ---------------- STACKED SCROLL GALLERY ---------------- */
+.stacked-scroll-section {
+  position: relative;
+  height: 500vh;
+  background: transparent;
+  
+}
+
+.stacked-scroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+}
+
+.stacked-gallery-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.stacked-gallery-header {
+  text-align: center;
+  margin-bottom: 20px;
+  z-index: 100;
+}
+
+.stacked-gallery-header .section-title {
+  margin-top: -100px;
+}
+
+.stacked-gallery-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.counter-num {
+  font-family: 'Bebas Neue', var(--font-heading), sans-serif;
+  font-size: 17px;
+  letter-spacing: 2.5px;
+  color: #ff3b3b;
+  font-weight: 600;
+}
+
+.progress-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.progress-dot {
+  width: 20px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-dot.active {
+  background: #8C1111;
+  width: 32px;
+}
+
+.stacked-cards-container {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  height: clamp(300px, 48vh, 480px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.stacked-card {
+  position: absolute;
+  width: 92%;
+  max-width: 800px;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #121212;
+  box-shadow:
+    0 30px 60px -15px rgba(0, 0, 0, 0.9),
+    0 0 25px rgba(140, 17, 17, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.stacked-card-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.stacked-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Dark gradient covering the left ~55% for text readability */
+.stacked-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.85) 30%,
+      rgba(0, 0, 0, 0.55) 50%,
+      transparent 70%);
+  pointer-events: none;
+}
+
+/* Text content container — left-aligned, vertically centered */
+.stacked-card-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 32px 24px;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Giant semi-transparent watermark number */
+.stacked-card-watermark {
+  font-family: 'Bebas Neue', 'Impact', var(--font-heading), sans-serif;
+  font-size: clamp(60px, 10vw, 110px);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.20);
+  line-height: 0.8;
+  letter-spacing: 4px;
+  margin-bottom: -25px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Bold uppercase title */
+.stacked-card-title {
+  font-family: 'Neue Montreal', 'Inter', var(--font-headline), sans-serif;
+  font-size: clamp(15px, 2vw, 22px);
+  font-weight: 700;
+  color: #F0F0F0;
+  margin: 0 0 20px 0;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  flex-shrink: 0;
+}
+
+/* Italic description paragraph */
+.stacked-card-description {
+  font-family: 'Inter', 'Georgia', serif;
+  font-size: clamp(11px, 1.2vw, 14px);
+  font-style: italic;
+  color: rgba(240, 240, 240, 0.85);
+  line-height: 1.55;
+  margin: 0 0 16px 0;
+  text-align: center;
+  max-width: 420px;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+  flex-shrink: 1;
+  min-height: 0;
+}
+
+/* Bottom counter: 01 // 05 */
+.stacked-card-counter {
+  font-family: 'Bebas Neue', 'Courier New', monospace;
+  font-size: clamp(13px, 1.2vw, 16px);
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 2px;
+  margin-top: auto;
+  text-align: left;
+  margin-left: 50px;
+  align-self: flex-start;
+}
+
+.counter-separator {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 768px) {
+  .stacked-scroll-sticky {
+    padding: 20px 0;
+  }
+
+  .stacked-cards-container {
+    height: clamp(250px, 42vh, 360px);
+  }
+
+  .stacked-card {
+    width: 95%;
+    border-radius: 14px;
+  }
+
+  .stacked-card-content {
+    width: 65%;
+    padding: 28px 20px 24px;
+  }
+
+  .stacked-card-watermark {
+    font-size: clamp(60px, 16vw, 100px);
+  }
+
+  .stacked-card-description {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .stacked-card-overlay {
+    background: linear-gradient(90deg,
+        rgba(0, 0, 0, 0.95) 0%,
+        rgba(0, 0, 0, 0.88) 40%,
+        rgba(0, 0, 0, 0.5) 65%,
+        transparent 85%);
+  }
+}
+
+@media (max-width: 480px) {
+  .stacked-cards-container {
+    height: clamp(220px, 38vh, 320px);
+  }
+
+  .stacked-card-content {
+    width: 75%;
+    padding: 20px 16px 20px;
+  }
+
+  .stacked-card-watermark {
+    font-size: 60px;
+  }
+
+  .stacked-card-title {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .stacked-card-description {
+    font-size: 11px;
+    line-height: 1.5;
+  }
+}

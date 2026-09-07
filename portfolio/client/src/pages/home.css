@@ -1,8 +1,9 @@
 /* ---------------- HERO ---------------- */
 .hero {
+  margin-top: 90px;
   padding: 12px 0 90px;
   text-align: center;
-  background: linear-gradient(180deg, #0D0D0D 0%, #170707 35%, #420A0A 100%);
+  background: linear-gradient(180deg, #0D0D0D 0%, #170707 20%, #420A0A 55%, #220808 82%, #0D0D0D 100%);
 }
 
 .hero-inner {
