@@ -1,286 +1,756 @@
-/* ---------------- FONTS ----------------
-   Bebas Neue and Inter are free — loaded from Google Fonts below.
-   "Neue Montreal" (used for the card title) is a paid font from
-   Pangram Pangram (pangrampangram.com). If you own a license, drop
-   the woff2 files in ./fonts/ and uncomment the @font-face block.
-   Until then, the title falls back to Inter at a heavy weight,
-   which is visually close (both are geometric grotesques).
-------------------------------------------------- */
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&display=swap');
+/* ============================================================
+   FONTS
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap'
+);
+
+
+/* ============================================================
+   MAIN SECTION
+   ============================================================ */
+
+.outline-scroll-section {
+
+  position: relative;
+
+  width: 100%;
+
+  /*
+   * Five cards.
+   *
+   * Each card gets approximately
+   * one viewport of scrolling.
+   */
+
+  height: 500vh;
+
+  background: transparent;
+}
+
+
+/* ============================================================
+   STICKY VIEWPORT
+   ============================================================ */
+
+.outline-scroll-sticky {
+
+  position: sticky;
+
+  top: 0;
+
+  width: 100%;
+
+  height: 100vh;
+
+  /*
+   * VERY IMPORTANT
+   *
+   * This prevents upcoming cards from being visible
+   * when the page is refreshed.
+   */
+
+  overflow: hidden;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+
+.outline-gallery {
+
+  position: relative;
+
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+/* ============================================================
+   HEADING
+   ============================================================ */
+
+.outline-heading {
+
+  position: absolute;
+
+  top: 3vh;
+
+  left: 0;
+
+  width: 100%;
+
+  z-index: 500;
+
+  text-align: center;
+
+  pointer-events: none;
+}
+
+
+.outline-eyebrow {
+
+  margin: 0 0 10px;
+
+  font-family:
+    'Inter',
+    sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+
+  color:
+    rgba(255, 255, 255, 0.42);
+}
+
+
+.outline-heading h2 {
+
+  margin: 0;
+
+  font-family:
+    'Inter',
+    sans-serif;
+
+  font-size:
+    clamp(32px,
+      4.5vw,
+      60px);
+
+  line-height: 0.92;
+
+  font-weight: 800;
+
+  letter-spacing: -3px;
+
+  color: #ffffff;
+}
+
+
+/* ============================================================
+   CARD WINDOW
+   ============================================================ */
 
 /*
-@font-face {
-  font-family: 'Neue Montreal';
-  src: url('./fonts/NeueMontreal-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-*/
+ * This is the visible area for the card stack.
+ *
+ * IMPORTANT:
+ *
+ * overflow is hidden here.
+ *
+ * This prevents Card 02, 03, 04, 05 from appearing
+ * below the first card on refresh.
+ */
 
-/* ---------------- STACKED SCROLL GALLERY ---------------- */
-.stacked-scroll-section {
+.outline-cards-window {
+
   position: relative;
-  height: 500vh;
-  background: transparent;
-  
+
+  width:
+    min(86vw,
+      1230px);
+
+  height:
+    min(70vh,
+      620px);
+
+  margin-top: 70px;
+
+  /*
+   * Allow the top 20% of passed cards to peek out
+   * while keeping bottom and sides cleanly clipped.
+   */
+  overflow: visible;
+
+  clip-path: inset(-20% 0% 0% 0%);
+
+  /*
+   * Creates a stacking context.
+   */
+
+  isolation: isolate;
 }
 
-.stacked-scroll-sticky {
-  position: sticky;
+
+/* ============================================================
+   CARD STACK
+   ============================================================ */
+
+.outline-cards {
+
+  position: absolute;
+
   top: 0;
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
 
-}
-
-.stacked-gallery-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.stacked-gallery-header {
-  text-align: center;
-  margin-bottom: 20px;
-  z-index: 100;
-}
-
-.stacked-gallery-header .section-title {
-  margin-top: -100px;
-}
-
-.stacked-gallery-status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 14px;
-}
-
-.counter-num {
-  font-family: 'Bebas Neue', var(--font-heading), sans-serif;
-  font-size: 17px;
-  letter-spacing: 2.5px;
-  color: #ff3b3b;
-  font-weight: 600;
-}
-
-.progress-dots {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-
-.progress-dot {
-  width: 20px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
-  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.progress-dot.active {
-  background: #8C1111;
-  width: 32px;
-}
-
-.stacked-cards-container {
-  position: relative;
-  width: 100%;
-  max-width: 860px;
-  height: clamp(300px, 48vh, 480px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.stacked-card {
-  position: absolute;
-  width: 92%;
-  max-width: 800px;
-  height: 100%;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: #121212;
-  box-shadow:
-    0 30px 60px -15px rgba(0, 0, 0, 0.9),
-    0 0 25px rgba(140, 17, 17, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transform-origin: center center;
-  will-change: transform, opacity;
-}
-
-.stacked-card-media {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.stacked-card-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  user-select: none;
-  pointer-events: none;
-}
-
-/* Dark gradient covering the left ~55% for text readability */
-.stacked-card-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg,
-      rgba(0, 0, 0, 0.92) 0%,
-      rgba(0, 0, 0, 0.85) 30%,
-      rgba(0, 0, 0, 0.55) 50%,
-      transparent 70%);
-  pointer-events: none;
-}
-
-/* Text content container — left-aligned, vertically centered */
-.stacked-card-content {
-  position: absolute;
-  top: 0;
   left: 0;
-  bottom: 0;
-  width: 55%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px 32px 24px;
-  z-index: 2;
-  pointer-events: none;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: visible;
+
+  isolation: isolate;
+}
+
+
+/* ============================================================
+   CARD
+   ============================================================ */
+
+.outline-card {
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  background: #111111;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.14);
+
+  /*
+   * IMPORTANT:
+   *
+   * No CSS transform.
+   *
+   * Framer Motion controls the transform.
+   */
+
+  transition: none;
+
+  will-change: transform;
+
+  backface-visibility: hidden;
+
+  transform-origin:
+    center center;
+
+  /*
+   * Card shadow.
+   */
+
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.55);
+}
+
+
+/* ============================================================
+   IMAGE
+   ============================================================ */
+
+.outline-card-image {
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+
+  height: 100%;
+
   overflow: hidden;
 }
 
-/* Giant semi-transparent watermark number */
-.stacked-card-watermark {
-  font-family: 'Bebas Neue', 'Impact', var(--font-heading), sans-serif;
-  font-size: clamp(60px, 10vw, 110px);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.20);
-  line-height: 0.8;
-  letter-spacing: 4px;
-  margin-bottom: -25px;
+
+.outline-card-image img {
+
+  width: 100%;
+
+  height: 100%;
+
   display: block;
-  flex-shrink: 0;
+
+  object-fit: cover;
+
+  user-select: none;
+
+  pointer-events: none;
+
+  backface-visibility: hidden;
 }
 
-/* Bold uppercase title */
-.stacked-card-title {
-  font-family: 'Neue Montreal', 'Inter', var(--font-headline), sans-serif;
-  font-size: clamp(15px, 2vw, 22px);
-  font-weight: 700;
-  color: #F0F0F0;
-  margin: 0 0 20px 0;
-  letter-spacing: 1.5px;
+
+/* ============================================================
+   DARK GRADIENT
+   ============================================================ */
+
+.outline-card-gradient {
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+
+    linear-gradient(90deg,
+
+      rgba(0, 0, 0, 0.94) 0%,
+
+      rgba(0, 0, 0, 0.87) 23%,
+
+      rgba(0, 0, 0, 0.62) 44%,
+
+      rgba(0, 0, 0, 0.28) 65%,
+
+      rgba(0, 0, 0, 0.02) 100%);
+}
+
+
+/* ============================================================
+   CONTENT
+   ============================================================ */
+
+.outline-card-content {
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 10;
+
+  padding:
+    50px 58px 36px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: flex-start;
+}
+
+
+/* ============================================================
+   GIANT NUMBER
+   ============================================================ */
+
+.outline-card-number {
+
+  position: absolute;
+
+  left: 52px;
+
+  top: 35px;
+
+  font-family:
+    'Bebas Neue',
+    Impact,
+    sans-serif;
+
+  font-size:
+    clamp(100px,
+      12vw,
+      175px);
+
+  line-height: 0.75;
+
+  letter-spacing: 4px;
+
+  color:
+    rgba(255, 255, 255, 0.16);
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+
+.outline-card-main {
+
+  position: relative;
+
+  z-index: 20;
+
+  width:
+    min(48%,
+      540px);
+
+  margin-top: 40px;
+}
+
+
+/* ============================================================
+   TITLE
+   ============================================================ */
+
+.outline-card-main h3 {
+
+  margin:
+    0 0 20px;
+
+  font-family:
+    'Inter',
+    sans-serif;
+
+  font-size:
+    clamp(24px,
+      3vw,
+      42px);
+
+  line-height: 0.95;
+
+  font-weight: 800;
+
+  letter-spacing: -1.5px;
+
   text-transform: uppercase;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
-  flex-shrink: 0;
+
+  color: #ffffff;
+
+  text-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
-/* Italic description paragraph */
-.stacked-card-description {
-  font-family: 'Inter', 'Georgia', serif;
-  font-size: clamp(11px, 1.2vw, 14px);
-  font-style: italic;
-  color: rgba(240, 240, 240, 0.85);
-  line-height: 1.55;
-  margin: 0 0 16px 0;
-  text-align: center;
-  max-width: 420px;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
-  flex-shrink: 1;
-  min-height: 0;
+
+/* ============================================================
+   DESCRIPTION
+   ============================================================ */
+
+.outline-card-main p {
+
+  margin: 0;
+
+  max-width: 500px;
+
+  font-family:
+    'Inter',
+    sans-serif;
+
+  font-size:
+    clamp(12px,
+      1.05vw,
+      15px);
+
+  line-height: 1.65;
+
+  font-weight: 400;
+
+  color:
+    rgba(255, 255, 255, 0.74);
+
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.8);
 }
 
-/* Bottom counter: 01 // 05 */
-.stacked-card-counter {
-  font-family: 'Bebas Neue', 'Courier New', monospace;
-  font-size: clamp(13px, 1.2vw, 16px);
-  font-style: italic;
-  color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 2px;
-  margin-top: auto;
-  text-align: left;
-  margin-left: 50px;
-  align-self: flex-start;
+
+/* ============================================================
+   COUNTER
+   ============================================================ */
+
+.outline-card-footer {
+
+  position: absolute;
+
+  left: 58px;
+
+  bottom: 34px;
+
+  z-index: 30;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  font-family:
+    'Bebas Neue',
+    monospace;
+
+  font-size: 16px;
+
+  letter-spacing: 3px;
+
+  color:
+    rgba(255, 255, 255, 0.62);
 }
 
-.counter-separator {
-  color: rgba(255, 255, 255, 0.3);
+
+.outline-slash {
+
+  color:
+    rgba(255, 255, 255, 0.28);
 }
 
-/* ---------------- RESPONSIVE ---------------- */
-@media (max-width: 768px) {
-  .stacked-scroll-sticky {
-    padding: 20px 0;
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 1000px) {
+
+  .outline-cards-window {
+
+    width: 90vw;
+
+    height: 64vh;
+
+    margin-top: 70px;
   }
 
-  .stacked-cards-container {
-    height: clamp(250px, 42vh, 360px);
+
+  .outline-card-content {
+
+    padding:
+      45px 42px 32px;
   }
 
-  .stacked-card {
-    width: 95%;
-    border-radius: 14px;
+
+  .outline-card-main {
+
+    width: 58%;
   }
 
-  .stacked-card-content {
-    width: 65%;
-    padding: 28px 20px 24px;
+
+  .outline-card-number {
+
+    left: 38px;
   }
 
-  .stacked-card-watermark {
-    font-size: clamp(60px, 16vw, 100px);
+
+  .outline-card-footer {
+
+    left: 42px;
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+  .outline-scroll-section {
+
+    height: 500vh;
   }
 
-  .stacked-card-description {
+
+  .outline-heading {
+
+    top: 5vh;
+  }
+
+
+  .outline-eyebrow {
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+  }
+
+
+  .outline-heading h2 {
+
+    font-size: 30px;
+
+    letter-spacing: -1.5px;
+  }
+
+
+  .outline-cards-window {
+
+    width: 92vw;
+
+    height: 60vh;
+
+    margin-top: 55px;
+  }
+
+
+  .outline-card {
+
+    border-radius: 16px;
+  }
+
+
+  /* ========================================================
+     MOBILE IMAGE GRADIENT
+     ======================================================== */
+
+  .outline-card-gradient {
+
+    background:
+
+      linear-gradient(180deg,
+
+        rgba(0, 0, 0, 0.08) 0%,
+
+        rgba(0, 0, 0, 0.30) 35%,
+
+        rgba(0, 0, 0, 0.84) 72%,
+
+        rgba(0, 0, 0, 0.97) 100%);
+  }
+
+
+  /* ========================================================
+     CONTENT
+     ======================================================== */
+
+  .outline-card-content {
+
+    justify-content: flex-end;
+
+    padding:
+      25px 22px 25px;
+  }
+
+
+  /* ========================================================
+     NUMBER
+     ======================================================== */
+
+  .outline-card-number {
+
+    left: 22px;
+
+    top: 25px;
+
+    font-size: 100px;
+  }
+
+
+  /* ========================================================
+     TEXT
+     ======================================================== */
+
+  .outline-card-main {
+
+    width: 100%;
+
+    margin-top: 0;
+  }
+
+
+  .outline-card-main h3 {
+
+    margin-bottom: 13px;
+
+    font-size: 22px;
+
+    line-height: 0.98;
+
+    letter-spacing: -0.7px;
+  }
+
+
+  .outline-card-main p {
+
     font-size: 12px;
-    line-height: 1.55;
+
+    line-height: 1.5;
   }
 
-  .stacked-card-overlay {
-    background: linear-gradient(90deg,
-        rgba(0, 0, 0, 0.95) 0%,
-        rgba(0, 0, 0, 0.88) 40%,
-        rgba(0, 0, 0, 0.5) 65%,
-        transparent 85%);
+
+  /* ========================================================
+     COUNTER
+     ======================================================== */
+
+  .outline-card-footer {
+
+    position: relative;
+
+    left: auto;
+
+    bottom: auto;
+
+    margin-top: 18px;
+
+    font-size: 13px;
   }
 }
 
-@media (max-width: 480px) {
-  .stacked-cards-container {
-    height: clamp(220px, 38vh, 320px);
+
+/* ============================================================
+   SMALL PHONE
+   ============================================================ */
+
+@media (max-width: 420px) {
+
+  .outline-cards-window {
+
+    width: 94vw;
+
+    height: 57vh;
+
+    margin-top: 50px;
   }
 
-  .stacked-card-content {
-    width: 75%;
-    padding: 20px 16px 20px;
+
+  .outline-heading h2 {
+
+    font-size: 27px;
   }
 
-  .stacked-card-watermark {
-    font-size: 60px;
+
+  .outline-card-content {
+
+    padding:
+      22px 18px 20px;
   }
 
-  .stacked-card-title {
-    font-size: 14px;
-    letter-spacing: 1px;
+
+  .outline-card-number {
+
+    left: 18px;
+
+    top: 22px;
+
+    font-size: 85px;
   }
 
-  .stacked-card-description {
+
+  .outline-card-main h3 {
+
+    font-size: 19px;
+  }
+
+
+  .outline-card-main p {
+
     font-size: 11px;
-    line-height: 1.5;
+  }
+
+
+  .outline-card-footer {
+
+    font-size: 12px;
   }
 }

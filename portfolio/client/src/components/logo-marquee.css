@@ -1,0 +1,126 @@
+/* ---------------- LOGO MARQUEE ---------------- */
+.logo-marquee {
+  position: relative;
+  width: 100%;
+  /* ~1 logo length wider than the video (860px + ~240px = 1100px) on both ends */
+  max-width: 1100px;
+  margin: 22px auto 0;
+  overflow: hidden;
+  padding: 18px 0 10px;
+
+  /* True alpha gradient fade on left and right edges */
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 7%,
+      black 93%,
+      transparent 100%);
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 7%,
+      black 93%,
+      transparent 100%);
+  pointer-events: auto;
+}
+
+.logo-marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  user-select: none;
+}
+
+/* Each group contains the full list of logos + identical right spacing.
+   NOTE: `gap` and `padding-right` must always stay equal — that's what
+   makes the loop seamless, since the spacing between the last logo of
+   one group and the first of the next has to match the internal spacing. */
+.logo-marquee-group {
+  display: flex;
+  align-items: center;
+  gap: 88px;
+  padding-right: 88px;
+  flex-shrink: 0;
+  animation: logo-marquee-scroll 17s linear infinite;
+  will-change: transform;
+}
+
+/* Pause animation smoothly on hover */
+.logo-marquee:hover .logo-marquee-group {
+  animation-play-state: paused;
+}
+
+.logo-marquee-item-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 58px;
+  flex-shrink: 0;
+}
+
+.logo-marquee-item {
+  height: 46px;
+  /* Noticeably larger, crisp optical height */
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  flex-shrink: 0;
+  opacity: 0.9;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.45));
+}
+
+.logo-marquee-item-wrap:hover .logo-marquee-item {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* Infinitely translates exactly 1 full group to the left with zero pixel jitter */
+@keyframes logo-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .logo-marquee-group {
+    animation: none;
+  }
+}
+
+/* Responsive tuning for tablets and mobile */
+@media (max-width: 1120px) {
+  .logo-marquee {
+    max-width: 100%;
+    padding: 14px 0 6px;
+    margin-top: 18px;
+    -webkit-mask-image: linear-gradient(to right,
+        transparent 0%,
+        black 5%,
+        black 95%,
+        transparent 100%);
+    mask-image: linear-gradient(to right,
+        transparent 0%,
+        black 5%,
+        black 95%,
+        transparent 100%);
+  }
+
+  .logo-marquee-group {
+    gap: 62px;
+    padding-right: 62px;
+    animation-duration: 11s;
+  }
+
+  .logo-marquee-item-wrap {
+    height: 46px;
+  }
+
+  .logo-marquee-item {
+    height: 36px;
+    max-width: 155px;
+  }
+}

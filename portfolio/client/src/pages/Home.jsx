@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import VideoFrame from '../components/VideoFrame.jsx'
 import StackedScrollGallery from '../components/StackedScrollGallery.jsx'
 import works from '../data/works.js'
+import LogoMarquee from '../components/LogoMarquee.jsx'
 import './home.css'
 
 
@@ -41,8 +42,10 @@ export default function Home() {
 
           <div className="hero-video-wrap">
             <VideoFrame src="/showreel.mp4" />
-          </div>
 
+          </div>
+          <LogoMarquee />
+          
           <p className="hero-description">
             Specialized motion design and video editing that brings deep analytical
             commentary, geopolitics, and complex narratives to life.
